@@ -4,6 +4,7 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
+  KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
   View,
@@ -34,6 +35,7 @@ const Start = ({ navigation }) => {
             onChangeText={setName}
             style={styles.textInput}
           ></TextInput>
+
           <View>
             <Text style={styles.chooseBgText}>
               Choose Your Background Color
@@ -83,6 +85,9 @@ const Start = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ImageBackground>
+      {Platform.OS === "ios" ? (
+        <KeyboardAvoidingView behavior="padding" />
+      ) : null}
     </View>
   );
 };
