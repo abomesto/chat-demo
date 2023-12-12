@@ -15,8 +15,8 @@ import { getAuth, signInAnonymously } from "firebase/auth";
 const imgBackground = require("../assets/bg-startscreen.png");
 
 const Start = ({ navigation }) => {
-  const [backgroundColor, setBackgroundColor] = useState();
-  const [name, setName] = useState();
+  const [backgroundColor, setBackgroundColor] = useState("");
+  const [name, setName] = useState("");
   const auth = getAuth();
 
   // const navigateToChat = () => {

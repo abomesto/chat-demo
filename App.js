@@ -19,12 +19,10 @@ LogBox.ignoreLogs(["AsyncStorage has been extracted from"]);
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { useEffect } from "react";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
-// Create the navigator
-const Stack = createNativeStackNavigator();
-const connectionStatus = useNetInfo();
 
 const App = () => {
   // Your web app's Firebase configuration
@@ -39,6 +37,10 @@ const App = () => {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+
+  // Create the navigator
+  const Stack = createNativeStackNavigator();
+  const connectionStatus = useNetInfo();
 
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);

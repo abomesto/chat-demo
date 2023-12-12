@@ -14,7 +14,7 @@ import {
 const Chat = ({ route, db, navigation, storage, isConnected }) => {
   const { userID, name } = route.params;
   const backgroundColor = route.params?.backgroundColor || "";
-  const [messages, setMessages] = useState([isConnected]);
+  const [messages, setMessages] = useState([]);
 
   const loadCachedMessages = async () => {
     const cachedMessages = (await AsyncStorage.getItem("messages")) || [];
@@ -36,16 +36,16 @@ const Chat = ({ route, db, navigation, storage, isConnected }) => {
       if (unsubMessages) unsubMessages();
       unsubMessages = null;
       const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
-      const unsubMessages = onSnapshot(q, (docs) => {
+      unsubMessages = onSnapshot(q, (docs) => {
         let newMessages = [];
         docs.forEach((doc) => {
           newMessages.push({
-            id: doc.id,
+            id: doc._id,
             ...doc.data(),
             createdAt: new Date(doc.data().createdAt.toMillis()),
           });
         });
-        cachedMessages(newMessages);
+        cacheMessages(newMessages);
         setMessages(newMessages);
       });
     } else {
